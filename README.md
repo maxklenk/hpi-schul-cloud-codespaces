@@ -1,13 +1,17 @@
 # Github Codespaces Experiment
 
-## Download
+## Setup
 
-Clone this repository and the submodules which include the source code of the HPI Schul-Cloud:
+Clone this repository:
 
 ```
-git clone --recurse-submodules -j8 git://github.com/maxklenk/hpi-schul-cloud-codespaces.git
+git clone git://github.com/maxklenk/hpi-schul-cloud-codespaces.git
 ```
 
+Execute the setup script to pull the needed repositories
+```
+sh setup.sh
+```
 
 ## Use
 
@@ -55,16 +59,14 @@ docker-compose exec synapse register_new_matrix_user -u sync -p secure -c /data/
 ## Problems
 
 - Run the `up` command again to apply a changed docker-compose file (e.g. env variables):
-
-```
-docker-compose up -d
-```
+  ```
+  docker-compose up -d
+  ```
 
 - Use the --build flag to rebuild/update the used image:
-
-```
-docker-compose up -d --build
-```
+  ```
+  docker-compose up -d --build
+  ```
 
 - Error Code 137
   Try to give docker more memory

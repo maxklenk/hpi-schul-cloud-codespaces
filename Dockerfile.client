@@ -11,6 +11,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
     pkgconfig \
     python2 \
     tzdata \
+    curl \
     zlib-dev
 
 EXPOSE 3100
@@ -25,5 +26,3 @@ RUN npm set unsafe-perm true \
 
 ENV SC_THEME=default
 ENV TZ=Europe/Berlin
-#RUN gulp clear-cache
-#RUN gulp
