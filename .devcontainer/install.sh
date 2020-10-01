@@ -3,4 +3,4 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Allow access to synapse folder
-chmod 777 ../synapse
+chmod 777 synapse
