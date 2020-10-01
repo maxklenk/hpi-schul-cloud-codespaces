@@ -8,6 +8,7 @@ Clone this repository and the submodules which include the source code of the HP
 git clone --recurse-submodules -j8 git://github.com/maxklenk/hpi-schul-cloud-codespaces.git
 ```
 
+
 ## Use
 
 To start the stack run
@@ -22,6 +23,12 @@ You can watch the output of all containers using
 docker-compose logs -f
 ```
 
+To stop all services run:
+
+```
+docker-compose down
+```
+
 # (once) Fill Database
 
 ```
@@ -33,6 +40,17 @@ docker-compose exec server npm run setup
 ```
 docker-compose exec synapse register_new_matrix_user -u sync -p secure -c /data/homeserver.yaml --admin http://localhost:8008
 ```
+
+
+## Ports
+
+- [3030](http://localhost:3030/) Schul-Cloud Server
+- [5959](http://localhost:5959/) Schul-Cloud Server (debug)
+- [7000](http://localhost:7000/) Schul-Cloud Client
+- [9310](http://localhost:9310/) Schul-Cloud Client (debug)
+- [8008](http://localhost:8008/) Synapse Matrix
+- [15672](http://localhost:15672/) RabbitMQ Management
+
 
 ## Problems
 
@@ -50,6 +68,7 @@ docker-compose up -d --build
 
 - Error Code 137
   Try to give docker more memory
+
 
 ## Add new Services
 
