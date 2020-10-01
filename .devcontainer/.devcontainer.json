@@ -1,4 +1,4 @@
 {
   "name": "HPI-Schul-Cloud Environment",
-  "postCreateCommand": "sh setup.sh"
+  "postCreateCommand": "sh install.sh && ../setup.sh"
 }

@@ -49,13 +49,13 @@ services:
       - MONGO_HOST=server-mongodb # for DB setup
       - MONGO_URI=mongodb://server-mongodb:27017/schulcloud
       - DB_URL=mongodb://server-mongodb:27017/schulcloud
-      - CALENDAR_URI=http://calendar:3000
+      #- CALENDAR_URI=http://calendar:3000
       - CONTENT_URI=https://consent.schul-cloud.org
       - NOTIFICATION_URI=http://notification:3030
       - PORT=3030
 
       # RocketChat
-      - ROCKET_CHAT_URI=https://chat.schulcloud.local
+      #- ROCKET_CHAT_URI=https://chat.schulcloud.local
       # - ROCKET_CHAT_ADMIN_TOKEN=
       # - ROCKET_CHAT_ADMIN_TOKEN=
       # - ROCKET_CHAT_ADMIN_ID=
@@ -85,14 +85,8 @@ services:
     networks:
       - storage
       - default
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3030"]
-      interval: 60s
-      timeout: 20s
-      retries: 5
-      start_period: 60s
     restart: unless-stopped
-    command: sh -c "npm install && npm run debug:container"
+    command: sh -c "npm install --no-audit && npm run debug:container"
   ###
 
   ### Schul-Cloud Client
@@ -110,7 +104,7 @@ services:
       # ENV
       - NODE_ENV=development
       - DOCKER=true
-      - CALENDAR_SERVICE_ENABLED=true
+      #- CALENDAR_SERVICE_ENABLED=true
       - TZ=Europe/Berlin
 
       # Theme and Titles
@@ -119,15 +113,12 @@ services:
       - SC_PRODUCTNAME=Hauptschule
       - SC_FEDERALSTATE=mainstate
 
-      # Google
-      #- GOOGLE_ANALYTICS_TRACKING_ID="UA-155982548-1"
-
       # URIs
       - HOST=http://localhost:3100
       - BACKEND_URL=http://server:3030
       - PUBLIC_BACKEND_URL=https://localhost:3030
-      - LIBRE_OFFICE_CLIENT_URL=http://localhost:9980
-      - ROCKET_CHAT_URI=https://chat.schulcloud.local
+      #- LIBRE_OFFICE_CLIENT_URL=http://localhost:9980
+      #- ROCKET_CHAT_URI=https://chat.schulcloud.local
 
       # Matrix Messenger
       - FEATURE_MATRIX_MESSENGER_ENABLED=true
@@ -138,21 +129,15 @@ services:
 
       # FEATURE TOGGLES
       - FEATURE_TEAMS_ENABLED=true
-      - LERNSTORE_MODE=LEGACYd
-      - ROCKETCHAT_SERVICE_ENABLED=true
+      - LERNSTORE_MODE=LEGACY
+      #- ROCKETCHAT_SERVICE_ENABLED=true
       - EDTR_SOURCE=https://cdn.jsdelivr.net/gh/schul-cloud/edtrio@e9d3bb9d66092bafa07846269c8fc6f9d5fb0559/dist/index.js
     ports:
       - "3100:3100"
       - "9310:9310" # debug port
       - "7000:7000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7000"]
-      interval: 60s
-      timeout: 20s
-      retries: 5
-      start_period: 60s
     restart: unless-stopped
-    command: sh -c "npm install && gulp watch-reload"
+    command: sh -c "npm install --no-audit && gulp watch-reload"
   ###
 
   ### Matrix Messenger
@@ -185,7 +170,7 @@ services:
       - WELCOME_MESSAGE_TEACHER=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113650243) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
       - WELCOME_MESSAGE_STUDENT=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113651573) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
     restart: unless-stopped
-    command: sh -c "npm install && npm run start"
+    command: sh -c "npm install --no-audit && npm run start"
 
   synapse:
     build:
@@ -214,9 +199,6 @@ services:
 
   # calendar:
   #   image: schulcloud/schulcloud-calendar
-  #   build:
-  #     context: ../schulcloud-calendar
-  #     dockerfile: Dockerfile.develop
   #   ports:
   #     - "3000"
   #   depends_on:
