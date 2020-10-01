@@ -86,7 +86,7 @@ services:
       - storage
       - default
     restart: unless-stopped
-    command: sh -c "npm install --no-audit && npm run debug:container"
+    command: sh -c "npm install --no-audit --prefer-offline && npm run debug:container"
   ###
 
   ### Schul-Cloud Client
@@ -137,7 +137,7 @@ services:
       - "9310:9310" # debug port
       - "7000:7000"
     restart: unless-stopped
-    command: sh -c "npm install --no-audit && gulp watch-reload"
+    command: sh -c "npm install --no-audit --prefer-offline && gulp watch-reload"
   ###
 
   ### Matrix Messenger
@@ -164,13 +164,12 @@ services:
       - MATRIX_SERVERNAME=matrix.local
       - MATRIX_SYNC_USER_NAME=sync
       - MATRIX_SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
-      # - MATRIX_SYNC_USER_TOKEN=
 
       - WELCOME_MESSAGE_ADMIN=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113650243) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
       - WELCOME_MESSAGE_TEACHER=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113650243) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
       - WELCOME_MESSAGE_STUDENT=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113651573) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
     restart: unless-stopped
-    command: sh -c "npm install --no-audit && npm run start"
+    command: sh -c "npm install --no-audit --prefer-offline && npm run start"
 
   synapse:
     build:

@@ -1,4 +1,5 @@
 {
   "name": "HPI-Schul-Cloud Environment",
-  "postCreateCommand": "sh install.sh && ../setup.sh"
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",
+  "postCreateCommand": "ls && sh .devcontainer/install.sh && setup.sh"
 }
