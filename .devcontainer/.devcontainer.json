@@ -1,5 +1,5 @@
 {
   "name": "HPI-Schul-Cloud Environment",
-  "image": "mcr.microsoft.com/vscode/devcontainers/base:debian-10",
-  "postCreateCommand": "sh .devcontainer/install.sh && sh setup.sh"
+  "dockerFile": "Dockerfile",
+  "postCreateCommand": "sh setup.sh"
 }
