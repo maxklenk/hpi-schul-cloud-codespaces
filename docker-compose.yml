@@ -124,7 +124,7 @@ services:
       - FEATURE_MATRIX_MESSENGER_ENABLED=true
       - FEATURE_MESSENGER_SCHOOL_ROOM_ENABLED=true
       - FEATURE_MESSENGER_SCHOOL_SETTINGS_VISIBLE=true
-      - MATRIX_MESSENGER_EMBED_URI=https://embed.dev.messenger.schule
+      - MATRIX_MESSENGER_EMBED_URI=http://localhost:8099
       - MATRIX_MESSENGER_HOMESERVER_URI=http://localhost:8008
 
       # FEATURE TOGGLES
@@ -179,6 +179,11 @@ services:
       - ./synapse:/data
     ports:
       - "8008:8008"
+
+  embed:
+    image: schulcloud/riot-web:feature-embed_20cf5f9d81a24deeaefdcdd5af66ef1019cfb1f5
+    ports:
+      - "8099:80"
   ###
 
   ### Schul-Cloud Calendar
