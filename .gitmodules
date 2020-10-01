@@ -1,9 +1,0 @@
-[submodule "schulcloud-server"]
-	path = schulcloud-server
-	url = git@github.com:hpi-schul-cloud/schulcloud-server.git
-[submodule "schulcloud-client"]
-	path = schulcloud-client
-	url = git@github.com:hpi-schul-cloud/schulcloud-client.git
-[submodule "schulcloud-synapse-synchronization"]
-	path = schulcloud-synapse-synchronization
-	url = git@github.com:hpi-schul-cloud/schulcloud-synapse-synchronization.git
