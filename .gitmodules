@@ -1,0 +1,6 @@
+[submodule "schulcloud-server"]
+	path = schulcloud-server
+	url = git@github.com:hpi-schul-cloud/schulcloud-server.git
+[submodule "schulcloud-client"]
+	path = schulcloud-client
+	url = git@github.com:hpi-schul-cloud/schulcloud-client.git

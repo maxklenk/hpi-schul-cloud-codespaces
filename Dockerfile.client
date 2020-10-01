@@ -1,0 +1,29 @@
+FROM node:12.16-alpine
+
+RUN apk update && apk upgrade && apk add --no-cache \
+    autoconf \
+    automake \
+    build-base \
+    git \
+    libtool \
+    make \
+    nasm \
+    pkgconfig \
+    python2 \
+    tzdata \
+    zlib-dev
+
+EXPOSE 3100
+
+WORKDIR /schulcloud-client
+
+# fix for intergrations tests
+RUN npm set unsafe-perm true \
+    && npm install -g \
+    nodemon \
+    gulp
+
+ENV SC_THEME=default
+ENV TZ=Europe/Berlin
+#RUN gulp clear-cache
+#RUN gulp

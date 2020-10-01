@@ -1,0 +1,8 @@
+{
+  "name": "HPI-Schul-Cloud Environment",
+  "dockerComposeFile": ["../docker-compose.yml"],
+
+  "service": "client",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose"
+}
