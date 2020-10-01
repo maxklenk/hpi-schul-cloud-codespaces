@@ -1,0 +1,4 @@
+FROM matrixdotorg/synapse:latest
+
+ADD https://raw.githubusercontent.com/devture/matrix-synapse-shared-secret-auth/master/shared_secret_authenticator.py /usr/local/lib/python3.7/site-packages/shared_secret_authenticator.py
+RUN chmod 755 /usr/local/lib/python3.7/site-packages/shared_secret_authenticator.py
