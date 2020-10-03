@@ -53,7 +53,7 @@ docker-compose exec synapse register_new_matrix_user -u sync -p secure -c /data/
 - [7000](http://localhost:7000/) Schul-Cloud Client
 - [9310](http://localhost:9310/) Schul-Cloud Client (debug)
 - [8008](http://localhost:8008/) Synapse Matrix
-- [15672](http://localhost:15672/) RabbitMQ Management
+- [15672](http://localhost:15672/) RabbitMQ Management (guest / guest)
 
 
 ## Problems

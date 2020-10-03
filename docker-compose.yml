@@ -124,7 +124,7 @@ services:
       - FEATURE_MATRIX_MESSENGER_ENABLED=true
       - FEATURE_MESSENGER_SCHOOL_ROOM_ENABLED=true
       - FEATURE_MESSENGER_SCHOOL_SETTINGS_VISIBLE=true
-      - MATRIX_MESSENGER_EMBED_URI=http://localhost:8099
+      - MATRIX_MESSENGER_EMBED_URI=https://embed.test.messenger.schule # or http://localhost:8099
       - MATRIX_MESSENGER_HOMESERVER_URI=http://localhost:8008
 
       # FEATURE TOGGLES
@@ -164,12 +164,8 @@ services:
       - MATRIX_SERVERNAME=matrix.local
       - MATRIX_SYNC_USER_NAME=sync
       - MATRIX_SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
-
-      - WELCOME_MESSAGE_ADMIN=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113650243) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
-      - WELCOME_MESSAGE_TEACHER=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113650243) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
-      - WELCOME_MESSAGE_STUDENT=Willkommen im Messenger der HPI Schul-Cloud!\nDu bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir [DIESE ANLEITUNG](https://docs.schul-cloud.org/pages/viewpage.action?pageId=113651573) an.\nWir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!\nEuer HPI Schul-Cloud Team 🙂
     restart: unless-stopped
-    command: sh -c "npm install --no-audit --prefer-offline && npm run start"
+    command: sh -c "npm install --no-audit --prefer-offline && npm run start" # npm run startd in next version of sync
 
   synapse:
     build:
