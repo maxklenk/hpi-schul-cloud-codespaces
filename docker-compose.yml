@@ -62,9 +62,10 @@ services:
 
       # Matrix Messenger
       - FEATURE_MATRIX_MESSENGER_ENABLED=true
-      - MATRIX_URI=http://synapse:8008
-      - MATRIX_SERVERNAME=matrix.local
-      - MATRIX_SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
+      - MATRIX_MESSENGER__URI=http://synapse:8008
+      - MATRIX_MESSENGER__SERVERNAME=matrix.local
+      - MATRIX_MESSENGER__SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
+      - MATRIX_MESSENGER__STUDENT_ROOM_CREATION=true
       - FEATURE_RABBITMQ_ENABLED=true
       - RABBITMQ_URI=amqp://server-rabbitmq
 
@@ -77,8 +78,6 @@ services:
       - FILE_PREVIEW_SERVICE_URI=http://filepreview:3000/filepreview
       - FILE_PREVIEW_CALLBACK_URI=http://server:3030/fileStorage/thumbnail/
 
-      # FEATURE TOGGLES
-      - LERNSTORE_MODE=LEGACY
     ports:
       - "3030:3030"
       - "5959:5959"
@@ -122,10 +121,12 @@ services:
 
       # Matrix Messenger
       - FEATURE_MATRIX_MESSENGER_ENABLED=true
-      - FEATURE_MESSENGER_SCHOOL_ROOM_ENABLED=true
-      - FEATURE_MESSENGER_SCHOOL_SETTINGS_VISIBLE=true
-      - MATRIX_MESSENGER_EMBED_URI=https://embed.test.messenger.schule # or http://localhost:8099
-      - MATRIX_MESSENGER_HOMESERVER_URI=http://localhost:8008
+      - MATRIX_MESSENGER__URI=http://localhost:8008
+      - MATRIX_MESSENGER__EMBED_URI=https://embed.test.messenger.schule # or http://localhost:8099
+      - MATRIX_MESSENGER__DISCOVER_URI=http://matrix.local
+      - MATRIX_MESSENGER__SCHOOL_SETTINGS_VISIBLE=true
+      - MATRIX_MESSENGER__SCHOOL_ROOM_ENABLED=true
+      - MATRIX_MESSENGER__STUDENT_ROOM_CREATION=true
 
       # FEATURE TOGGLES
       - FEATURE_TEAMS_ENABLED=true
@@ -160,10 +161,10 @@ services:
       - MATRIX_SYNC_USER_DISPLAYNAME=HPI Sync Bot
 
       # Synapse
-      - MATRIX_URI=http://synapse:8008
-      - MATRIX_SERVERNAME=matrix.local
+      - MATRIX_MESSENGER__URI=http://synapse:8008
+      - MATRIX_MESSENGER__SERVERNAME=matrix.local
       - MATRIX_SYNC_USER_NAME=sync
-      - MATRIX_SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
+      - MATRIX_MESSENGER__SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
     restart: unless-stopped
     command: sh -c "npm install --no-audit --prefer-offline && npm run start" # npm run startd in next version of sync
 
