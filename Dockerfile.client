@@ -23,6 +23,3 @@ RUN npm set unsafe-perm true \
     && npm install -g \
     nodemon \
     gulp
-
-ENV SC_THEME=default
-ENV TZ=Europe/Berlin

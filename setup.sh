@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Clone repositories
+git clone --depth 1 https://github.com/hpi-schul-cloud/nuxt-client.git
 git clone --depth 1 https://github.com/hpi-schul-cloud/schulcloud-client.git
 git clone --depth 1 https://github.com/hpi-schul-cloud/schulcloud-server.git
 git clone --depth 1 https://github.com/hpi-schul-cloud/schulcloud-synapse-synchronization.git
