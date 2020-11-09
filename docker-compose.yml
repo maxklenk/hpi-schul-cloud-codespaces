@@ -66,6 +66,8 @@ services:
       - MATRIX_MESSENGER__SERVERNAME=matrix.local
       - MATRIX_MESSENGER__SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
       - MATRIX_MESSENGER__STUDENT_ROOM_CREATION=true
+      - MATRIX_MESSENGER__WELCOME_MESSAGE_STUDENT=Willkommen im Messenger der HPI Schul-Cloud!<br />Du bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir <a href="https://docs.hpi-schul-cloud.org/pages/viewpage.action?pageId=113651573">DIESE ANLEITUNG</a> an.<br />Wir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!<br />Euer HPI Schul-Cloud Team 🙂
+      - MATRIX_MESSENGER__WELCOME_MESSAGE_TEACHER=Willkommen im Messenger der HPI Schul-Cloud!<br />Du bist neu hier und möchtest gerne mehr über die Grundfunktionen des Messengers erfahren? Dann schaue dir <a href="https://docs.hpi-schul-cloud.org/pages/viewpage.action?pageId=113650243">DIESE ANLEITUNG</a> an.<br />Wir wünschen euch einen konstruktiven und respektvollen Austausch untereinander!<br />Euer HPI Schul-Cloud Team 🙂
       - FEATURE_RABBITMQ_ENABLED=true
       - RABBITMQ_URI=amqp://server-rabbitmq
 
@@ -191,7 +193,6 @@ services:
       # Synapse
       - MATRIX_MESSENGER__URI=http://synapse:8008
       - MATRIX_MESSENGER__SERVERNAME=matrix.local
-      - MATRIX_SYNC_USER_NAME=sync
       - MATRIX_MESSENGER__SECRET=HmRJMD4ivBA0Y6viUuEkbbPsTUqatGOvMeO3HJTIVOzEhZdCMG2zZ0OXBdmJdlKg
     restart: unless-stopped
     command: sh -c "npm install --no-audit --prefer-offline --no-package-lock && npm run start" # npm run startd in next version of sync
@@ -213,55 +214,55 @@ services:
 
   ### Schul-Cloud OAuth
   ###
-  hydra-postgres:
-    image: postgres:9.6
-    environment:
-      - SECRETS_SYSTEM=supersecurityperfavore
-      - DSN=postgres://hydra:secret@hydra-postgres:5432/hydra?sslmode=disable
-      - TLS_ALLOW_TERMINATION_FROM=172.18.0.0/24
-      - OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT=atleast8
-      - URLS_SELF_ISSUER=http://localhost:9000
-      - SC_FRONTEND=http://localhost:3100
-      - POSTGRES_USER=hydra
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=hydra
-      - SERVE_PARAMS=--dangerous-force-http
-    ports:
-      - 5433:5432
-    volumes:
-      - data-hydra:/var/lib/postgresql/data
-    restart: on-failure
+  # hydra-postgres:
+  #   image: postgres:9.6
+  #   environment:
+  #     - SECRETS_SYSTEM=supersecurityperfavore
+  #     - DSN=postgres://hydra:secret@hydra-postgres:5432/hydra?sslmode=disable
+  #     - TLS_ALLOW_TERMINATION_FROM=172.18.0.0/24
+  #     - OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT=atleast8
+  #     - URLS_SELF_ISSUER=http://localhost:9000
+  #     - SC_FRONTEND=http://localhost:3100
+  #     - POSTGRES_USER=hydra
+  #     - POSTGRES_PASSWORD=secret
+  #     - POSTGRES_DB=hydra
+  #     - SERVE_PARAMS=--dangerous-force-http
+  #   ports:
+  #     - 5433:5432
+  #   volumes:
+  #     - data-hydra:/var/lib/postgresql/data
+  #   restart: on-failure
 
-  hydra-migrate-database:
-    image: oryd/hydra:v1.0.0-rc.14
-    command: ["migrate", "sql", "--yes", "postgres://hydra:secret@hydra-postgres:5432/hydra?sslmode=disable"]
+  # hydra-migrate-database:
+  #   image: oryd/hydra:v1.0.0-rc.14
+  #   command: ["migrate", "sql", "--yes", "postgres://hydra:secret@hydra-postgres:5432/hydra?sslmode=disable"]
 
-  hydra-host:
-    image: oryd/hydra:v1.0.0-rc.14
-    ports:
-      #- 9000:4444
-      - 9001:4445
-    environment:
-      - SECRETS_SYSTEM=supersecurityperfavore
-      - DSN=postgres://hydra:secret@hydra-postgres:5432/hydra?sslmode=disable
-      - TLS_ALLOW_TERMINATION_FROM=172.18.0.0/24
-      - OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT=atleast8
-      - URLS_SELF_ISSUER=http://localhost:9000
-      - SC_FRONTEND=http://localhost:3100
-      - POSTGRES_USER=hydra
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=hydra
-      - URLS_LOGIN=http://localhost:3100/oauth2/login
-      - URLS_CONSENT=http://localhost:3100/oauth2/consent
-      - OIDC_SUBJECT_IDENTIFIERS_ENABLED=public,pairwise
-    depends_on:
-      - hydra-migrate-database
-    restart: on-failure
-    command: ["serve", "all", "--dangerous-force-http"]
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: any
+  # hydra-host:
+  #   image: oryd/hydra:v1.0.0-rc.14
+  #   ports:
+  #     #- 9000:4444
+  #     - 9001:4445
+  #   environment:
+  #     - SECRETS_SYSTEM=supersecurityperfavore
+  #     - DSN=postgres://hydra:secret@hydra-postgres:5432/hydra?sslmode=disable
+  #     - TLS_ALLOW_TERMINATION_FROM=172.18.0.0/24
+  #     - OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT=atleast8
+  #     - URLS_SELF_ISSUER=http://localhost:9000
+  #     - SC_FRONTEND=http://localhost:3100
+  #     - POSTGRES_USER=hydra
+  #     - POSTGRES_PASSWORD=secret
+  #     - POSTGRES_DB=hydra
+  #     - URLS_LOGIN=http://localhost:3100/oauth2/login
+  #     - URLS_CONSENT=http://localhost:3100/oauth2/consent
+  #     - OIDC_SUBJECT_IDENTIFIERS_ENABLED=public,pairwise
+  #   depends_on:
+  #     - hydra-migrate-database
+  #   restart: on-failure
+  #   command: ["serve", "all", "--dangerous-force-http"]
+  #   deploy:
+  #     replicas: 1
+  #     restart_policy:
+  #       condition: any
   ###
 
   ### Schul-Cloud Calendar
