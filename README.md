@@ -33,18 +33,21 @@ To stop all services run:
 docker-compose down
 ```
 
-# (once) Fill Database
+# Fill Database
 
+The SC database is automatically filled by running `setup.sh` which triggers `reset.sh`.
+To execute it manually run:
 ```
 docker-compose exec server npm run setup
 ```
 
-# (once) Create Synapse Sync User
+# Create Synapse Sync User
 
+The sync user is automatically creaded by running `setup.sh` which triggers `reset.sh`.
+To execute it manually run:
 ```
 docker-compose exec synapse register_new_matrix_user -u sync -p secure -c /data/homeserver.yaml --admin http://localhost:8008
 ```
-
 
 ## Ports
 
@@ -71,21 +74,3 @@ docker-compose exec synapse register_new_matrix_user -u sync -p secure -c /data/
 - Error Code 137
   Try to give docker more memory
 
-
-## Add new Services
-
-1. Add the source
-
-```
-git submodule add git@github.com:hpi-schul-cloud/schulcloud-synapse-synchronization.git
-```
-
-2. Add service in `docker-compose.yml`
-
-3. Start services
-
-```
-docker-compose up -d
-```
-
-4. Test if everything is working
