@@ -2343,10 +2343,14 @@ room_list_publication_rules:
 # This feature is designed to be used in closed federations only, where each
 # participating server enforces the same rules.
 #
-#third_party_event_rules:
-#  module: "my_custom_project.SuperRulesSet"
-#  config:
-#    example_option: 'things'
+third_party_event_rules:
+  module: "synapse_event_checker.EventChecker"
+  config:
+    # A list of homeservers to block invites from.
+    block_room_creation: true
+    permission_endpoint: "http://server:3030/messengerPermissions/"
+    room_creators_whitelist:
+      - "@sync"
 
 ## Opentracing ##
 
